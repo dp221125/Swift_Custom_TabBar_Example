@@ -10,6 +10,9 @@ import UIKit
 
 class CustomTabbarView: UIView {
     
+    var buttonSize: CGFloat = 70
+    var buttonBackImageSize: CGFloat = 0
+    
     let contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = .white
@@ -23,13 +26,29 @@ class CustomTabbarView: UIView {
         return customTabBar
     }()
     
+    let leftStack: ButtonStack = {
+        return ButtonStack()
+    }()
+    
+    let rightStack: ButtonStack = {
+        return ButtonStack()
+    }()
+
+    let centerButtonBackImage: UIImageView = {
+        return UIImageView()
+    }()
+    
+    let centerButton: UIButton = {
+        return UIButton()
+    }()
+    
     func makeContentViewConstraint() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
             contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
             contentView.widthAnchor.constraint(equalTo: widthAnchor),
-            contentView.heightAnchor.constraint(equalTo: heightAnchor)
+            contentView.heightAnchor.constraint(equalTo: heightAnchor),
             ])
     }
     
@@ -43,14 +62,7 @@ class CustomTabbarView: UIView {
         
     }
     
-    let leftStack: ButtonStack = {
-        return ButtonStack()
-    }()
-    
-    let rightStack: ButtonStack = {
-        return ButtonStack()
-    }()
-    
+
     func makeStackConstraint(targetStack: UIView) {
         targetStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -68,17 +80,58 @@ class CustomTabbarView: UIView {
         rightStack.trailingAnchor.constraint(equalTo: customTabBar.trailingAnchor,constant: -16).isActive = true
     }
     
+    func makeCenterButtonBackImageConstraint() {
+        centerButtonBackImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            centerButtonBackImage.centerXAnchor.constraint(equalTo: customTabBar.centerXAnchor),
+            centerButtonBackImage.widthAnchor.constraint(equalToConstant: buttonBackImageSize),
+            centerButtonBackImage.heightAnchor.constraint(equalTo: centerButtonBackImage.widthAnchor),
+            centerButtonBackImage.topAnchor.constraint(equalTo: customTabBar.topAnchor, constant: -(buttonBackImageSize/2))
+
+            ])
+    }
+    
+    func makeCenterButtonConstraint() {
+        centerButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            centerButton.centerXAnchor.constraint(equalTo: centerButtonBackImage.centerXAnchor),
+            centerButton.centerYAnchor.constraint(equalTo: centerButtonBackImage.centerYAnchor),
+            centerButton.widthAnchor.constraint(equalToConstant: buttonSize),
+            centerButton.heightAnchor.constraint(equalTo: centerButton.widthAnchor),
+            centerButton.topAnchor.constraint(equalTo: customTabBar.topAnchor, constant: -(buttonSize/2))
+            
+            ])
+    }
+    
     func makeView() {
         backgroundColor = .white
         addSubview(contentView)
         addSubview(customTabBar)
-        makeCustomTabBarConstraint()
         addSubview(leftStack)
+        addSubview(rightStack)
+        addSubview(centerButtonBackImage)
+        addSubview(centerButton)
+    }
+    
+    func makeItemConstraints() {
+        makeContentViewConstraint()
+        makeCustomTabBarConstraint()
         makeStackConstraint(targetStack: leftStack)
         makeLeftStackConstraint()
-        addSubview(rightStack)
         makeStackConstraint(targetStack: rightStack)
         makeRightStackConstraint()
+        makeCenterButtonBackImageConstraint()
+        makeCenterButtonConstraint()
+    }
+    
+    func makeCircleBackButtonImage() {
+        centerButtonBackImage.backgroundColor = .white
+        centerButtonBackImage.layer.cornerRadius = buttonBackImageSize / 2
+    }
+    
+    func makeCircleBackButton() {
+        centerButton.backgroundColor = UIColor(named: "HotPink")
+        centerButton.layer.cornerRadius = buttonSize / 2
     }
     
     func makeLabelTitle() {
@@ -100,8 +153,12 @@ class CustomTabbarView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        buttonBackImageSize = buttonSize + 10
         makeView()
+        makeItemConstraints()
         makeLabelTitle()
+        makeCircleBackButtonImage()
+        makeCircleBackButton()
         linkTagNumber()
     }
     

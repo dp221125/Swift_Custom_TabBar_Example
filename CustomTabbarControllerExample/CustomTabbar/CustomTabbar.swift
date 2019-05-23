@@ -15,13 +15,13 @@ class CustomTabbar: UIViewController {
     var mywriteVC: MyWriteHistoryViewController?
     var settingVC: SettingViewController?
     var vcList = [UIViewController]()
-    var navi: UINavigationController?
+    var navigation: UINavigationController?
     var prevIndex: Int?
     
-    @objc func linkAction(sender: UIButton) {
+    @objc func linkAction(_ sender: UIButton) {
         checkView()
         prevIndex = sender.tag
-        moveView(index: sender.tag)
+        moveView(sender.tag)
     }
     
     /// 새로운 뷰를 만들기 전에 기본의 뷰가 있으면 그 뷰를 제거한다.
@@ -31,9 +31,9 @@ class CustomTabbar: UIViewController {
             return
         }
   
-        navi?.willMove(toParent: nil)
-        navi?.view.removeFromSuperview()
-        navi?.removeFromParent()
+        navigation?.willMove(toParent: nil)
+        navigation?.view.removeFromSuperview()
+        navigation?.removeFromParent()
         
         vcList[prevSelectedIndex].willMove(toParent: nil)
         vcList[prevSelectedIndex].view.removeFromSuperview()
@@ -42,27 +42,22 @@ class CustomTabbar: UIViewController {
     }
     
     /// 새로운 뷰로 이동한다.
-    func moveView(index: Int) {
+    func moveView(_ index: Int) {
         
         guard let targetView = view as? CustomTabbarView else {
             return
         }
-        
+       
         addChild(vcList[index])
         vcList[index].view.frame = targetView.contentView.bounds
-
-        navi = UINavigationController(rootViewController: vcList[index])
-        navi?.navigationBar.barTintColor = UIColor(red:0.35, green:0.42, blue:0.75, alpha:1.0)
-        navi?.navigationBar.tintColor = .white
-
-        targetView.contentView.addSubview(navi!.view)
+        targetView.contentView.addSubview(vcList[index].view)
         vcList[index].didMove(toParent: self)
     }
     
-    ///최초 화면을 불러온다. 최초화면은 0번 인덱스를 가진 화면.
-    func firstScreen() {
-        moveView(index: 0)
-        prevIndex = 0
+    @objc func moveWriteView() {
+
+        let writeView = WriteViewController()
+        present(writeView,animated: true)
     }
     
     ///각 탭바의 아이템들을 액션에 연결한다.
@@ -76,6 +71,8 @@ class CustomTabbar: UIViewController {
         targetView.leftStack.secondButton.addTarget(self, action: #selector(linkAction), for: .touchUpInside)
         targetView.rightStack.firstButton.addTarget(self, action: #selector(linkAction), for: .touchUpInside)
         targetView.rightStack.secondButton.addTarget(self, action: #selector(linkAction), for: .touchUpInside)
+
+        targetView.centerButton.addTarget(self, action: #selector(moveWriteView), for: .touchUpInside)
         
     }
     
@@ -85,7 +82,6 @@ class CustomTabbar: UIViewController {
         }
         
         vcList = views
-
     }
     
     override func loadView() {
@@ -98,6 +94,16 @@ class CustomTabbar: UIViewController {
         
         makeViewList()
         linkTargetAction()
-        firstScreen()
     }
+    
+    /// 뷰가 로딩이 다 되고 난 뒤 기본 뷰를 셋팅한다.
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if prevIndex == nil {
+            prevIndex = 0
+            moveView(0)
+        }
+    }
+    
+
 }

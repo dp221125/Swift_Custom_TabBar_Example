@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
         guard let ownView = view as? BaseView else {
             return
         }
-        
+  
         ownView.titleLabel.text = "First View"
     }
 

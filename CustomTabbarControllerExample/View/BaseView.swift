@@ -33,6 +33,7 @@ class BaseView: UIView {
         addSubview(titleLabel)
         makeTitleLableConstraint()
     }
+
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

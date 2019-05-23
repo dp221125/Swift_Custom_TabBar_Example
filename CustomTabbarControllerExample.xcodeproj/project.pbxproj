@@ -18,6 +18,7 @@
 		B4AD046922953C1D007D645B /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD046822953C1D007D645B /* BaseView.swift */; };
 		B4AD046B22953CF9007D645B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD046A22953CF9007D645B /* SettingViewController.swift */; };
 		B4AD046E229543B5007D645B /* CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD046D229543B5007D645B /* CustomTabbar.swift */; };
+		B4D0934022962A8A00B47BCC /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D0933F22962A8A00B47BCC /* WriteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		B4AD046822953C1D007D645B /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B4AD046A22953CF9007D645B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B4AD046D229543B5007D645B /* CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbar.swift; sourceTree = "<group>"; };
+		B4D0933F22962A8A00B47BCC /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +68,8 @@
 		B4AD044F22953699007D645B /* CustomTabbarControllerExample */ = {
 			isa = PBXGroup;
 			children = (
-				B4AD046C22953D1D007D645B /* View */,
 				B4AD045022953699007D645B /* AppDelegate.swift */,
+				B4AD046C22953D1D007D645B /* View */,
 				B4AD046F229543F5007D645B /* CustomTabbar */,
 				B4AD045422953699007D645B /* Main.storyboard */,
 				B4AD04572295369A007D645B /* Assets.xcassets */,
@@ -85,6 +87,7 @@
 				B4AD046422953B20007D645B /* BookMarkViewController.swift */,
 				B4AD046622953BFA007D645B /* MyWriteHistoryViewController.swift */,
 				B4AD046A22953CF9007D645B /* SettingViewController.swift */,
+				B4D0933F22962A8A00B47BCC /* WriteViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4D0934022962A8A00B47BCC /* WriteViewController.swift in Sources */,
 				B4AD046522953B20007D645B /* BookMarkViewController.swift in Sources */,
 				B4AD0463229536AD007D645B /* CustomTabbarView.swift in Sources */,
 				B4AD046722953BFA007D645B /* MyWriteHistoryViewController.swift in Sources */,
