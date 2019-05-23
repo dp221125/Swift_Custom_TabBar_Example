@@ -15,7 +15,6 @@ class CustomTabbar: UIViewController {
     var mywriteVC: MyWriteHistoryViewController?
     var settingVC: SettingViewController?
     var vcList = [UIViewController]()
-    var navigation: UINavigationController?
     var prevIndex: Int?
     
     @objc func linkAction(_ sender: UIButton) {
@@ -30,11 +29,7 @@ class CustomTabbar: UIViewController {
         guard let prevSelectedIndex = prevIndex else {
             return
         }
-  
-        navigation?.willMove(toParent: nil)
-        navigation?.view.removeFromSuperview()
-        navigation?.removeFromParent()
-        
+
         vcList[prevSelectedIndex].willMove(toParent: nil)
         vcList[prevSelectedIndex].view.removeFromSuperview()
         vcList[prevSelectedIndex].removeFromParent()
