@@ -47,6 +47,7 @@ class CustomTabbar: UIViewController {
         vcList[index].view.frame = targetView.contentView.bounds
         targetView.contentView.addSubview(vcList[index].view)
         vcList[index].didMove(toParent: self)
+        
     }
     
     @objc func moveWriteView() {
@@ -72,6 +73,7 @@ class CustomTabbar: UIViewController {
     }
     
     func makeViewList() {
+        
         guard let views = [homeVC, boomarkVC, mywriteVC, settingVC] as? [UIViewController] else {
             return
         }
@@ -81,6 +83,9 @@ class CustomTabbar: UIViewController {
     
     override func loadView() {
         view = CustomTabbarView()
+    }
+    
+    override func viewDidLoad() {
         
         homeVC = HomeViewController()
         boomarkVC = BookMarkViewController()
@@ -98,6 +103,7 @@ class CustomTabbar: UIViewController {
             prevIndex = 0
             moveView(0)
         }
+        
     }
     
 

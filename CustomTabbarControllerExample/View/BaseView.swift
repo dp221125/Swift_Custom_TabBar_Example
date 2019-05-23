@@ -10,7 +10,7 @@ import UIKit
 
 /**
  각 뷰의 기본뷰
- 이 뷰를 기본뷰로 삼고 TitleLabel에 뷰 이름 출력 목적
+ 이 뷰를 기본뷰로 삼고 TitleLabel에 뷰 이름 출력
  */
 class BaseView: UIView {
     
