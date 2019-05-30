@@ -44,8 +44,8 @@ class CustomTabbar: UIViewController {
         }
        
         addChild(vcList[index])
-        vcList[index].view.frame = targetView.contentView.bounds
         targetView.contentView.addSubview(vcList[index].view)
+        vcList[index].view.frame = targetView.contentView.bounds
         vcList[index].didMove(toParent: self)
         
     }
